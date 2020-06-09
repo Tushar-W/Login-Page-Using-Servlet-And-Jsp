@@ -12,30 +12,29 @@ import java.io.PrintWriter;
 
 @WebServlet(
         description = "Login Servlet Testing",
-        urlPatterns = {"/com.servlet.LoginServlet"},
+        urlPatterns = {"/LoginServlet"},
         initParams = {
-                @WebInitParam(name = "username", value = "Tushar"),
-                @WebInitParam(name = "password", value = "Tushar@95")
+                @WebInitParam(name = "username", value = "Tush"),
+                @WebInitParam(name = "password", value = "Tush")
         }
 )
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //get request parameters for userID and password
-        String user = req.getParameter("user");
-        String pwd = req.getParameter("pwd");
+        String user = req.getParameter("username");
+        String pwd = req.getParameter("password");
         //get servlet config init params
         String userID = getServletConfig().getInitParameter("username");
         String password = getServletConfig().getInitParameter("password");
         if (userID.equals(user) && password.equals(pwd)) {
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
+            req.setAttribute("username", user);
+            req.getRequestDispatcher("welcome.jsp").forward(req, resp);
         }else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/LoginPage.jsp");
             PrintWriter out = resp.getWriter();
             out.println("<font color=red>Either user name or password is wrong_</font>");
             rd.include(req, resp);
         }
-
     }
 }
