@@ -33,7 +33,9 @@ public class LoginServlet extends HttpServlet {
         }else {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/LoginPage.jsp");
             PrintWriter out = resp.getWriter();
-            out.println("<font color=red>Either user name or password is wrong_</font>");
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('please fill all fields');");
+            out.println("</script>");
             rd.include(req, resp);
         }
     }

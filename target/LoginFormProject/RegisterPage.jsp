@@ -5,31 +5,36 @@
   Time: 6:38 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Register Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <form action="RegistrationServlet" method="post">
-    <table>
-        <tr>
-            <td> Name : </td>
-            <td><input type="text" name="name"></td>
-        </tr>
-        <tr>
-            <td> EmailId : </td>
-            <td><input type="text" name="email"></td>
-        </tr>
-        <tr>
-            <td> Password : </td>
-            <td><input type="password" name="password"></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="submit" value="Register"></td>
-            <td><a href="LoginPage.jsp">login</a></td>
-        </tr>
-    </table>
+    <div class="register-box">
+        <h1>Registration</h1>
+        <div class="textbox">
+            <label>
+                <input type="text" placeholder="name" name="name">
+            </label>
+        </div>
+        <div class="textbox">
+            <label>
+                <input type="text" placeholder="email" name="email">
+            </label>
+        </div>
+        <div class="textbox">
+            <label>
+                <input type="password" placeholder="password" name="password">
+            </label>
+        </div>
+        <br>
+        <input class="btn" type="submit" name="submit" value="Register">
+        <br>
+        <a href="LoginPage.jsp">Login</a>
+    </div>
 </form>
 </body>
 </html>

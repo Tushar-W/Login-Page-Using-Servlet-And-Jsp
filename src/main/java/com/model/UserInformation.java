@@ -1,4 +1,4 @@
-package com.servlet;
+package com.model;
 
 public class UserInformation {
     private String id,name,email,password,date;
