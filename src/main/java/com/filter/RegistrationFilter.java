@@ -31,9 +31,8 @@ public class RegistrationFilter implements Filter {
         out = response.getWriter();
         if (isAllFieldsEmpty() && isNameCorrect() && isEmailIdCorrect() && isPasswordMatch()) {
             chain.doFilter(request, response);
-        } else {
-            rd.include(request, response);
         }
+        rd.include(request, response);
     }
 
     private boolean isPasswordMatch () {
@@ -41,13 +40,13 @@ public class RegistrationFilter implements Filter {
             return true;
         else {
            out.println("<script type=\"text/javascript\">");
-           out.println("alert('invalid password" +
-                        "note: password minimum 8 characters" +
-                        "password have at least 1 uppercase" +
-                        "password have at least 1 numeric" +
-                        "password have exactly 1 special character');");
-            out.println("</script>");
-            return false;
+           out.println("alert('invalid password " +
+                   " note: password minimum 8 characters " +
+                   " password have at least 1 uppercase " +
+                   " password have at least 1 numeric " +
+                   " password have exactly 1 special character');");
+           out.println("</script>");
+           return false;
         }
     }
 
@@ -67,7 +66,8 @@ public class RegistrationFilter implements Filter {
             return true;
         else {
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('invalid name');");
+            out.println("alert('invalid name " +
+                    " note : first letter of name must have capital');");
             out.println("</script>");
             return false;
         }

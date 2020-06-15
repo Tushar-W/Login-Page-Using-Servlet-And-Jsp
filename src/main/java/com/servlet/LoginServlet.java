@@ -1,42 +1,50 @@
 package com.servlet;
 
-import javax.servlet.RequestDispatcher;
+import com.dao.RegisterDao;
+import com.model.UserInformation;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(
         description = "Login Servlet Testing",
-        urlPatterns = {"/LoginServlet"},
-        initParams = {
-                @WebInitParam(name = "username", value = "Tush"),
-                @WebInitParam(name = "password", value = "Tush")
-        }
+        urlPatterns = {"/LoginServlet"}
 )
 public class LoginServlet extends HttpServlet {
+    PrintWriter out=null;
+    RegisterDao dao = new RegisterDao();
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //get request parameters for userID and password
-        String user = req.getParameter("username");
-        String pwd = req.getParameter("password");
-        //get servlet config init params
-        String userID = getServletConfig().getInitParameter("username");
-        String password = getServletConfig().getInitParameter("password");
-        if (userID.equals(user) && password.equals(pwd)) {
-            req.setAttribute("username", user);
-            req.getRequestDispatcher("welcome.jsp").forward(req, resp);
-        }else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/LoginPage.jsp");
-            PrintWriter out = resp.getWriter();
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        /*
+          get request parameters for username and password
+         */
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        /*
+          get registered user information
+         */
+        UserInformation user = dao.checkUser(username, password);
+        if (user.getName()==null && user.getPassword()==null) {
+            out = resp.getWriter();
             out.println("<script type=\"text/javascript\">");
-            out.println("alert('please fill all fields');");
+            out.println("alert('username or password is wrong');");
             out.println("</script>");
-            rd.include(req, resp);
+            req.getRequestDispatcher("LoginPage.jsp").include(req, resp);
+        }else {
+            HttpSession session= req.getSession();
+            session.setAttribute("username",user.getName());
+            session.setAttribute("email",user.getEmail());
+            session.setAttribute("date",user.getDate());
+            out = resp.getWriter();
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('login successful');");
+            out.println("</script>");
+            req.getRequestDispatcher("welcome.jsp").forward(req, resp);
         }
     }
 }

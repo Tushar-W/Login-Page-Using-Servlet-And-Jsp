@@ -18,7 +18,7 @@
         <div class="textbox">
             <i class="fas fa-user"></i>
             <label>
-                <input type="text" placeholder="username" name="uname">
+                <input type="text"  placeholder="username" name="username" >
             </label>
         </div>
 
@@ -31,7 +31,8 @@
         <br>
         <input class="btn" name="submit" type="submit" value="Login">
         <br>
-        <a href="RegisterPage.jsp">new user</a>
+        <h5>Are you new user..?</h5>
+        <a class="link" href="RegisterPage.jsp"><h4>Register</h4></a>
     </div>
 </form>
 </body>

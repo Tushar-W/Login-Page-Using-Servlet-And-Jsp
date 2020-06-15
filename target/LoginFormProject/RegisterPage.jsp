@@ -14,7 +14,7 @@
 <body>
 <form action="RegistrationServlet" method="post">
     <div class="register-box">
-        <h1>Registration</h1>
+        <h1>Register</h1>
         <div class="textbox">
             <label>
                 <input type="text" placeholder="name" name="name">
@@ -32,8 +32,6 @@
         </div>
         <br>
         <input class="btn" type="submit" name="submit" value="Register">
-        <br>
-        <a href="LoginPage.jsp">Login</a>
     </div>
 </form>
 </body>
